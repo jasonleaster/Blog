@@ -1,0 +1,27 @@
+---
+layout: post
+title: "Labs of MIT 6.034"
+date: 2015-12-25 23:30:06 +0800
+comments: true
+tags: [labs, MachineLearning]
+categories: [labs]
+---
+
+Two month ago, I decide to do a project about machine learning. So, I get start to learn machine learning and implemment some algorithms of ML.
+I find that there is a course in MIT -- 6.034 Artificial Intelligence which contain a lot of funny labs. That will help me to learn ML.
+
+I don't want to write a lot of analysis article about this course like what I have done in 6.008 . So, I just push my solution which also is incompletement onto github. If anyone interesting in this lab, you could touch me and I would like to communicate with you about these labs if I'm not busy.
+
+What you should know is that the version of this labs is updated in 2015.
+
+Here is the link you could get my solution:
+[My Solution of MIT 6.034](https://github.com/jasonleaster/MIT_6.034_2015)
+
+<!-- more -->
+
+---------
+Photo by Jason Leaster
+
+Thanks god. There is a beautiful girl in my life and encourage me walk through the dark time of my life. Thank you. Annabella.
+
+![images](/images/img_for_2015_12_25/girlfriend.png)

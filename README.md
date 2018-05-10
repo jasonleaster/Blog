@@ -5,7 +5,7 @@ Personal Blog (All rights reserved)
 
 ## 2015
 ### December
-* 晴空一鹤排云上，便引诗情到碧霄。——刘禹锡*
+*晴空一鹤排云上，便引诗情到碧霄。——刘禹锡*
 
 * December 30, 2015 **»** [K-Means 算法实现](./2015-12-30-machine-learning-with-k-means.markdown)
 
@@ -15,7 +15,7 @@ Personal Blog (All rights reserved)
 * July 24, 2015 **»** [大佬心中的二分查找](./2015-07-24-binary-search.markdown)
 
 ### June
-* 夫夷以近，则游者众；险以远，则至者少。——王安石*
+*夫夷以近，则游者众；险以远，则至者少。——王安石*
 
 * June 13, 2015 **»** [C++内存对象模型之旅](./2015-06-13-memory-model-of-objects-in-c-plus-plus.markdown)
 

@@ -3,8 +3,26 @@
 
 Personal Blog (All rights reserved)
 
+## 2016
+### April
+
+*出门莫恨无人随，书中车马多如簇。——刘禹锡*
+
+* April 09, 2016 **»** [Python 使用经验谈 -- 迭代器和生成器](2016-04-09-iterater-and-generator-in-python.markdown)
+* April 09, 2016 **»** [Python 使用经验谈 -- Tuple和List 区别之说](2016-04-09-tuple-and-list-in-python.markdown)
+
+### February
+
+*我见青山多妩媚，料青山、见我应如是。——辛弃疾*
+
+* February 03, 2016 **»** [Python 整型对象 源码分析](2016-02-03-memory-model-of-int-object-in-python.markdown)
+* February 04, 2016 **»** [Python 字典对象 源码分析](2016-02-04-dict-object-in-python.markdown)
+* February 05, 2016 **»** [Python 函数式编程闲谈](2016-02-05-functional-programming-in-python.markdown)
+* February 21, 2016 **»** [Python 虚拟机架构实现之旅](2016-02-21-architecture-of-python-virtual-machine.markdown)
+
 ## 2015
 ### December
+
 *晴空一鹤排云上，便引诗情到碧霄。——刘禹锡*
 
 * December 30, 2015 **»** [K-Means 算法实现](./2015-12-30-machine-learning-with-k-means.markdown)

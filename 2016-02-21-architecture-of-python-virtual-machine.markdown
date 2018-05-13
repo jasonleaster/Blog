@@ -235,8 +235,7 @@ PyEval_EvalFrameEx(PyFrameObject *f, int throwflag)
             if (HAS_ARG(opcode))
                 oparg = NEXTARG();
 dispatch_opcode:
-                                                                                    /* Main switch on opcode */
-                                                                                        READ_TIMESTAMP(inst0);
+              /* Main switch on opcode */
             switch (opcode) {
 
                 case NOP:
@@ -247,10 +246,7 @@ dispatch_opcode:
                     ...
                     ...
             }
-
-
     }
-
     ...
 }
 

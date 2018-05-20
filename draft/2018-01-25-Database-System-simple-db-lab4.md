@@ -55,15 +55,19 @@ Excluded | F      | F
 2. 在释放一个封锁之后，事务不再获得任何其他封锁。
 
 从事务的角度来看，锁的控制分为两个阶段，扩展阶段(Growing)和收缩阶段(Shrinking)。
+
 ![images](/images/img_for_2018_01/TwoPhaseLocking.jpg)
 
 一旦获取锁的阶段过去了，即进入到收缩阶段，那么是不再允许获取锁的。
+
 ![images](/images/img_for_2018_01/TwoPhaseLockingVialationDemo.jpg)
 
 > The two phase locking rule can be summarized as: never acquire a lock after a lock has been released. -- Wikipedia
 
 但是以上二阶段协议对于并发控制的约束还是很弱，事务没有结束之前就释放锁会引入很多问题，例如典型的会导致Cascading Abort。
+
 ![images](/images/img_for_2018_01/2PL_CascadingAbort.jpg)
+
 上图中左边事务T1在Commit之前释放了A锁，那么此时事务T2对A锁竞争成功并对A锁控制的数据进行读写操作，但是T1突然中断需要回滚，那么T2读到的关于A锁数据的内容都需要回滚，T2也被迫需要回滚，故形成了一种级联回滚的事件。
 
 针对由于事务过程中释放write lock尔后回滚，进一步脏读引起的Cascading Abort的问题，解决方案就是S2PL.
@@ -84,7 +88,8 @@ SS2PL也是基于2PL，仅在事务结束的时候（commit or rollback），才
 ### 死锁
 
 什么是死锁？
-A deadlock is a cycle of transactions waiting for locks to be released by each other.
+
+> A deadlock is a cycle of transactions waiting for locks to be released by each other.
 
 处理死锁的两种方法: 死锁检测(deadlock detection)和死锁预防(deadlock prevention).
 
@@ -122,8 +127,37 @@ A deadlock is a cycle of transactions waiting for locks to be released by each o
 
 ### 意向锁
 
+当我们在讨论事务内给数据加锁的话，锁的颗粒度如何呢，锁整个表？锁整个数据页？还是锁某一行数据就行了？
+
+我们如果能够少做一些操作，少加锁，但达到相同的目的，效率岂不是提升很多？
+
 考虑一个问题，如果一个事务需要对1000个tuple加锁，是不是得执行1000次加锁操作呢？
 
 显然，大家都不希望这么繁琐。最好锁能够分层级(表、行等等)的对数据进行锁定。
 
 ![images](/images/img_for_2018_01/databaseHierarchy.jpg)
+
+由此衍生出意向锁。意向锁允许更高层级的数据节点以共享或排他的性质被锁住，而不需要检查该节点下的所有子节点。利用数据的层级性，减少加锁的次数，提升效率。
+
+如果一个节点正处于“意向锁”模式，那么说明该节点下的正在有显式的加锁操作正在进行（注意不是已经完成，完成之后该节点的意向锁应该被释放）。
+
+共享意向锁(IS): 说明该节点下正在由共享锁正在落锁
+排他意向锁(IX): 说明该节点下正在由排他锁正在落锁
+共享的排他意向锁(SIX): 该节点下的子节点已经有一些处于共享锁模式了，但是此时，该节点下正在有节点被加上排它锁、或者由共享锁升级为排它锁。
+
+下图即使意向锁与其他普通锁的兼容性矩阵。
+
+![images](/images/img_for_2018_01/intentionLockCompatibility.jpg)
+
+实际情况中，我们一般写SQL是不需要手动去落锁的，DBMS会根据SQL的语义，自动的生成查询计划完成对资源的落锁。并且，当某节点下的锁很多的时候，某些DBMS可能会动态的做锁的升级操作，提升锁的层级，进而可以降低底层细粒度锁落锁的频率。我们能根据查询计划，分析落锁情况，了解并发竞争中涉及的加锁顺序即可，具备掌握数据库死锁情况的分析。
+
+### 幻读
+
+到目前为止，仅对`查询` `更新` 操作中涉及的锁进行了分析探讨，对于插入和删除的情况，我们进一步分析。
+
+对于以下这种情况，就是幻读:
+
+![images](/images/img_for_2018_01/phantomProblem.jpg)
+
+事务T1仅仅只能给T1的第一句SQL执行时存在的数据加上共享锁，不能给还未存在的数据加锁。在T1执行第二条语句之前T2插入了数据，就造成了T1事务内，同一条SQL居然产生不同结果的问题。
+

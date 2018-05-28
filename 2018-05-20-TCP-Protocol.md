@@ -57,7 +57,11 @@ _Q: 如果第二次握手的数据包在到达之前，客户端挂掉了呢？_
 
 _Q: TCP最大连接数，客户端和服务端是一样的吗？如果不是，服务端的理论最大连接数是多少，实际最大连接数可能达到多少，说明考虑的因素？_
 
-http://www.cnblogs.com/fjping0606/p/4729389.html
+客户端和服务端的最大连接数是不一样的。{local ip, local port,remote ip, remote port} 四个元素确定一个TCP连接，并且客户端的端口是具有**独占性**的，即某个连接使用了这个空闲端口后，其他连接不能再使用这个端口，对于客户端而言，本地端口是有限的，端口号的数据类型是unsigned short，理论上限是65535，故客户端TCP并发的理论上限是65535。
+
+server端通常固定在某个本地端口上监听，等待client的连接请求。不考虑地址重用（unix的SO_REUSEADDR选项）的情况下，即使server端有多个ip，本地监听端口也是独占的，因此server端tcp连接4元组中只有remote ip（也就是client ip）和remote port（客户端port）是可变的，因此最大tcp连接为客户端ip数×客户端port数，对IPV4，不考虑ip地址分类等因素，最大tcp连接数约为2的32次方（ip数）×2的16次方（port数），也就是server端单机最大tcp连接数约为2的48次方。
+
+实际上，单台服务器资源是有限的，特别是内存资源，要达到理论上限几乎是不可能的，实际中一般能完成"C10K问题"就是具体的例子。一般的服务器要单机并发量过万是比较困难的。
 
 ### 数据传送
 
@@ -84,5 +88,6 @@ A: 我也还没想明白。
 
 
 延伸阅读:
+0. https://zh.wikipedia.org/wiki/%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE
 1. http://colobu.com/2014/09/18/linux-tcpip-tuning/
 2. https://stackoverflow.com/questions/16259774/what-if-a-tcp-handshake-segment-is-lost

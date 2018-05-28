@@ -58,7 +58,7 @@ T BinarySearch(const T p_array[], int start, int end, T target)
 
     for(;start < end;)
     {
-        middle = (start + end)/2;
+        middle = start + (end - start)/2;
 
         if(p_array[middle] == target)
         {

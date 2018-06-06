@@ -91,3 +91,7 @@ A: 我也还没想明白。
 0. https://zh.wikipedia.org/wiki/%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE
 1. http://colobu.com/2014/09/18/linux-tcpip-tuning/
 2. https://stackoverflow.com/questions/16259774/what-if-a-tcp-handshake-segment-is-lost
+
+-----
+摄于2016年春 孤峰塔顶
+![images](/images/img_for_2018_05/finally.jpg)

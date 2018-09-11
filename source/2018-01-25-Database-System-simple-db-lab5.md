@@ -8,7 +8,7 @@ tags: simple-db
 
 ### 什么是B+树
 
-![images](./images/img_for_2018_09/B+Tree_demo.png)
+![images](/images/img_for_2018_09/B+Tree_demo.png)
 
 B+树与二叉树类似，是树形数据结构的一种，B+树是一个多(叉)分枝树，是B树的一种改进型数据结构。
 
@@ -19,7 +19,7 @@ B+树与二叉树类似，是树形数据结构的一种，B+树是一个多(叉
 * 每一个内部节点(除Root节点外)，其余节点都最起码有一半是有数据的
 * 每一个内部节点，如果有k个阈值划分点(keys)，则对应有k+1个子节点(children)
 
-![images](./images/img_for_2018_01/BTree_Overview.jpg)
+![images](/images/img_for_2018_01/BTree_Overview.jpg)
 
 ### 为什么用B+树(该数据结构体的特性)
 
@@ -27,7 +27,7 @@ B+树与二叉树类似，是树形数据结构的一种，B+树是一个多(叉
 
 而B+树在实际使用的过程中，内部节点几乎都会被加载到RAM中，在InnoDB中，3层高度的B+树即可储存百万级别的数据规模。后面我会详细介绍，B+树如何做到的。
 
-![images](./images/img_for_2018_01/BTree_InPractice.jpg)
+![images](/images/img_for_2018_01/BTree_InPractice.jpg)
 
 B+树的节点分为两个类型:
 
